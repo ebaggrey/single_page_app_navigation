@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Single Page Navigation</title>
+
+     <style>
+         *,*:before,*:after{
+             -moz-box-sizing: border-box;
+             -webkit-box-sizing: border-box;
+             box-sizing: border-box;
+             padding: 0;
+             margin: 0;
+         }
+
+         html{
+             height: 100%;
+         }
+       
+         
+         body{
+             font-family: sans-serif, Serif, Roboto, “Segoe UI”,
+             BlinkMacSystemFont, -apple-system, Helvetica
+             font-size: 100%;
+             width: 100%;
+             height: 100%;
+             line-height: 1.5;
+         }
+
+         h1{
+             font-size: 1.75em;
+             line-height: 1.2857;
+         }
+
+         a{
+             text-decoration: none;
+             color: currentColor;
+         }
+
+         .active{
+             background-color: #ffffff ;
+             color: currentColor;
+         }
+
+         .active-indicator-left{
+             border-left: 3px solid currentColor;
+         }
+
+         .active-indicator-bottom{
+             border-bottom: 3px solid currentColor;
+         }
+
+         nav{
+             display: inline-flex;
+             justify-content: flex-start;
+             align-items: center;
+             vertical-align: center;
+             margin: 0;
+             padding: 0;
+             width: 100%;
+             font-size: 1em;
+             line-height: inherit;
+         }
+
+         nav a , nav .nav-item{
+             display: flex;
+             padding: 1em;
+         }
+
+         .nav-vertical-orientation{
+             display: flex;
+             flex-direction: column;
+             opacity: 1;
+         }
+
+
+         .shadow {
+             -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.17) ;
+             -moz-box-shadow: 0 1px 5px rgba(0,0,0,.17) ;
+             box-shadow: 0 1px 5px 	rgba(0,0,0,.17) ;
+         }
+         /*****************VIEW******************/
+
+         .views{
+             width: 100%;
+             margin-top: 2%;
+
+         }
+         .view{
+             display: none;
+             padding: 1rem;
+         }
+
+         .view-default{
+             display: block;
+             padding: 1rem;
+         }
+
+         :target{
+             display: block;
+         }
+
+         :target ~ .view-default{
+             display: none;
+         }
+
+     </style>
+
+
+</head>
+<body>
+    <nav class="shadow">
+        <a   class="nav-item active active-indicator-bottom" href="#about-me">About me</a>
+        <a   class="nav-item"  href="#profile">Profile</a>
+        <a   class="nav-item"  href="#contact">Contact</a>
+    </nav>
+
+    <main class="views">
+        <article class="view" id="profile">
+            <h2>Profile</h2>
+        </article>
+        <article class="view" id="contact">
+            <h2>Contact</h2>
+        </article>
+
+        <article id="about-me" class="view-default" >
+            <h2>About Me</h2>
+        </article>
+    </main>
+      <script>
+          (function Navbar(){
+
+              function onNavbarItemClicked(e){
+
+                  const currentTarget= e.currentTarget;
+                  const activeStyle="active";
+                  const navbarItems=document.getElementsByClassName("nav-item");
+                  for(let i=0;i<navbarItems.length;i++){
+                      let item=navbarItems[i];
+                      item.classList.remove(activeStyle)
+                      item.classList.remove("active-indicator-bottom");
+                  }
+
+
+                  for(let i=0;i<navbarItems.length;i++){
+                      let item=navbarItems[i];
+                      if(item.hash===currentTarget.hash){
+                          item.classList.add(activeStyle);
+                          item.classList.add("active-indicator-bottom");
+                          break;
+                      }
+                  }
+                   return false;
+              }
+
+
+              const navbarItems=document.getElementsByClassName("nav-item");
+               for(let i =0 ;i<navbarItems.length;i++){
+                    let navbarItem=navbarItems[i];
+                  navbarItem.addEventListener('click',onNavbarItemClicked)
+               }
+          }());
+      </script>
+</body>
+</html>
+
