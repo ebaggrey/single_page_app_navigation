@@ -1,2 +1,2 @@
 # single_page_app_navigation
-Simple Steps to Create Single Page App Navigation
+7 Simple Steps to Create Single Page App Navigation
